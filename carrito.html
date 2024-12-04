@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="navbar"></div>
+    <h1>Carrito</h1>
+
+    <!-- Contenedor del Carrito -->
+    <div id="cart-items-container">
+        <div id="cart-items"></div>
+        <div id="delivery-options">
+            <h2 id="op">Opciones de Entrega</h2>
+            <label>
+                <input type="checkbox" id="delivery" onclick="toggleDelivery()"> Delivery (Recargo: $5.000)
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" id="pickup" onclick="togglePickup()"> Retiro en Tienda
+            </label>
+        </div>
+        <div id="total-container">
+            <h2>Total a Pagar: <span id="total-amount">$0</span></h2>
+        </div>
+    </div>
+
+    <div id="botones">
+        <button onclick="removeSelected()" class="remove-items">Eliminar Seleccionados</button>
+        <button onclick="goToPay()" class="go-to-pay">Ir a Pagar</button>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        let deliveryCharge = 0; // Cargo por Delivery
+
+        // Cargar navbar dinámicamente
+        fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("navbar").innerHTML = data;
+        })
+        .catch(error => console.log('Error al cargar el navbar:', error));
+
+        // Cargar footer dinámicamente
+        fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("footer").innerHTML = data;
+        })
+        .catch(error => console.log('Error al cargar el footer:', error));
+
+        // Renderizar los productos del carrito
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartContainer = document.getElementById('cart-items');
+            const totalAmount = document.getElementById('total-amount');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let total = 0;
+
+            // Limpiar el contenedor antes de renderizar
+            cartContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = '<p>El carrito está vacío.</p>';
+                totalAmount.innerText = `$${total.toLocaleString()}`;
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('product');
+                cartItem.innerHTML = `
+                    <input type="checkbox" data-index="${index}">
+                    <span>${item.name} - $${item.price.toLocaleString()}</span>
+                `;
+                cartContainer.appendChild(cartItem);
+                total += item.price;
+            });
+
+            // Mostrar el total inicial
+            totalAmount.innerText = `$${(total + deliveryCharge).toLocaleString()}`;
+        });
+
+        // Función para eliminar productos seleccionados
+        function removeSelected() {
+            const checkboxes = document.querySelectorAll('#cart-items input[type="checkbox"]');
+            const selectedIndexes = Array.from(checkboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => parseInt(checkbox.dataset.index));
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter((_, index) => !selectedIndexes.includes(index));
+            localStorage.setItem('cart', JSON.stringify(cart));
+            location.reload(); // Recargar la página para actualizar el carrito
+        }
+
+        // Función para ir a pagar
+        function goToPay() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert('El carrito está vacío. No puedes proceder al pago.');
+                return;
+            }
+
+            const totalAmount = document.getElementById('total-amount').innerText;
+            alert(`El total a pagar es ${totalAmount}.`);
+            window.location.href = 'https://webpay.com/pay'; // Reemplaza con tu URL de pago real
+        }
+
+        // Función para manejar el checkbox de Delivery
+        function toggleDelivery() {
+            const deliveryCheckbox = document.getElementById('delivery');
+            const pickupCheckbox = document.getElementById('pickup');
+            const totalAmount = document.getElementById('total-amount');
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+            if (deliveryCheckbox.checked) {
+                deliveryCharge = 5000; // Cargo por Delivery
+                pickupCheckbox.checked = false; // Deseleccionar Retiro en Tienda
+            } else {
+                deliveryCharge = 0;
+            }
+
+            totalAmount.innerText = `$${(total + deliveryCharge).toLocaleString()}`;
+        }
+
+        // Función para manejar el checkbox de Retiro en Tienda
+        function togglePickup() {
+            const deliveryCheckbox = document.getElementById('delivery');
+            const pickupCheckbox = document.getElementById('pickup');
+            const totalAmount = document.getElementById('total-amount');
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let total = cart.reduce((sum, item) => sum + item.price, 0);
+
+            if (pickupCheckbox.checked) {
+                deliveryCharge = 0; // Sin cargo adicional
+                deliveryCheckbox.checked = false; // Deseleccionar Delivery
+            }
+
+            totalAmount.innerText = `$${(total + deliveryCharge).toLocaleString()}`;
+        }
+    </script>
+</body>
+</html>

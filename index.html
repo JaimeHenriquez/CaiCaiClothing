@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrusel de Productos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <div id="presentacion">
+        <h1>¡Bienvenido a Cai Cai Clothing! 🌟</h1>
+        <p>Somos una tienda especializada en estampados y sublimación de prendas como:<br>
+            👕 Poleras<br>
+            🧥 Polerones<br>
+            🎽 Ropa deportiva<br><br>
+            ¿Buscas personalizar tus prendas para un evento, grupo o simplemente para lucir único? ¡Tenemos todo lo que necesitas! 😎<br><br>
+            ✨ Nuestros servicios incluyen:<br>
+            Diseños personalizados: Trae tu idea o deja que nuestros diseñadores la creen para ti.<br>
+            Impresión de alta calidad: Usamos materiales y técnicas duraderas para que tus prendas luzcan siempre como nuevas.<br>
+            Pedidos al por mayor: Ideal para empresas, colegios y eventos.<br>
+            🌈 Colores vibrantes y calidad garantizada: Sublimamos tus ideas con amor y detalle.<br>
+            📦 Envíos a todo Chile</p>
+    </div>
+
+    <!-- Sección Productos -->
+    <h1 id="top">Productos Top</h1>
+    <div class="carousel" id="product-gallery">
+        <div class="carousel-item">
+            <img src="imagenes/modelo1.PNG" alt="Producto 1">
+            <div class="overlay">
+                <p class="product-name">Hoodie Negro Estampado</p>
+                <p class="product-price">$20.000</p>
+                <button class="add-to-cart" onclick="addToCart('Hoodie Negro Estampado', 20000)">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="imagenes/modelo3.PNG" alt="Producto 2">
+            <div class="overlay">
+                <p class="product-name">Hoodie Gris Estampado</p>
+                <p class="product-price">$20.000</p>
+                <button class="add-to-cart" onclick="addToCart('Hoodie Gris Estampado', 20000)">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="imagenes/modelo2.PNG" alt="Producto 3">
+            <div class="overlay">
+                <p class="product-name">Hoodie Verde Estampado</p>
+                <p class="product-price">$20.000</p>
+                <button class="add-to-cart" onclick="addToCart('Hoodie Verde Estampado', 20000)">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="imagenes/modelo4.PNG" alt="Producto 4">
+            <div class="overlay">
+                <p class="product-name">Chaqueta Café Estampada</p>
+                <p class="product-price">$35.990</p>
+                <button class="add-to-cart" onclick="addToCart('Chaqueta Café Estampada', 35990)">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="imagenes/modelo5.PNG" alt="Producto 5">
+            <div class="overlay">
+                <p class="product-name">Hoodie Verde Agua</p>
+                <p class="product-price">$20.000</p>
+                <button class="add-to-cart" onclick="addToCart('Hoodie Verde Agua', 20000)">Agregar al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Productos Nuevos -->
+    <h1 id="owao">Productos Nuevos</h1>
+    <div class="carousel" id="new-products">
+        <div class="carousel-item">
+            <img src="imagenes/modelo6.webp" alt="Producto 6">
+            <div class="overlay">
+                <p class="product-name">Hoodie Negro Estampado</p>
+                <p class="product-price">$20.000</p>
+                <button class="add-to-cart" onclick="addToCart('Hoodie Negro Estampado', 20000)">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="imagenes/modelo7.jpg" alt="Producto 7">
+            <div class="overlay">
+                <p class="product-name">Hoodie Blanco Estampado</p>
+                <p class="product-price">$20.000</p>
+                <button class="add-to-cart" onclick="addToCart('Hoodie Blanco Estampado', 20000)">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="imagenes/modelo8.jpg" alt="Producto 8">
+            <div class="overlay">
+                <p class="product-name">Hoodie Crema Estampado</p>
+                <p class="product-price">$20.000</p>
+                <button class="add-to-cart" onclick="addToCart('Hoodie Crema Estampado', 20000)">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="imagenes/modelo9.avif" alt="Producto 9">
+            <div class="overlay">
+                <p class="product-name">Hoodie Rojo Estampado</p>
+                <p class="product-price">$20.000</p>
+                <button class="add-to-cart" onclick="addToCart('Hoodie Rojo Estampado', 20000)">Agregar al Carrito</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="imagenes/modelo10.jpg" alt="Producto 10">
+            <div class="overlay">
+                <p class="product-name">Polera Negra Estampada</p>
+                <p class="product-price">$15.000</p>
+                <button class="add-to-cart" onclick="addToCart('Polera Negra Estampada', 15000)">Agregar al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        // Cargar navbar dinámicamente
+        fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("navbar").innerHTML = data;
+
+            // Actualizar navbar según el estado de sesión
+            const username = localStorage.getItem('username');
+            const userInfo = document.getElementById('user-info');
+            if (username) {
+                userInfo.innerHTML = `
+                    <button onclick="logout()" style="background: none; border: none; color: white; cursor: pointer;">Cerrar Sesión</button>
+                `;
+            }
+        })
+        .catch(error => console.log('Error al cargar el navbar:', error));
+
+        // Cargar footer dinámicamente
+        fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("footer").innerHTML = data;
+        })
+        .catch(error => console.log('Error al cargar el footer:', error));
+
+        // Función de cierre de sesión
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.href = 'login.html';
+        }
+
+        // Modificación: Cambiar saludo, título y galería de productos dinámicamente según el usuario
+        document.addEventListener('DOMContentLoaded', () => {
+            const presentacion = document.getElementById('presentacion');
+            const topSection = document.getElementById('top');
+            const productGallery = document.getElementById('product-gallery');
+            const newProductsSection = document.getElementById('new-products');
+            const newProductsHeader = document.getElementById('owao');
+            const username = localStorage.getItem('username');
+
+            if (username) {
+                // Cambiar saludo
+                presentacion.innerHTML = `
+                    <h1>¡Bienvenido, ${username}! 🌟</h1>
+                    <p>Nos alegra mucho saber que estas nuevamente aqui!</p>
+                `;
+
+                // Cambiar título de "Productos Top" a "Recomendado para ti"
+                topSection.innerText = 'Recomendado para ti';
+
+                // Ocultar sección "Productos Nuevos"
+                newProductsSection.style.display = 'none';
+                newProductsHeader.style.display = 'none';
+
+                // Cambiar galería de productos a productos recomendados
+                const recommendedProducts = [
+                    { name: 'Hoodie Negro Estampado', price: 20000, image: 'imagenes/modelo6.webp' },
+                    { name: 'Hoodie Blanco Estampado', price: 20000, image: 'imagenes/modelo7.jpg' },
+                    { name: 'Hoodie Verde Estampado', price: 20000, image: 'imagenes/modelo2.PNG' },
+                    { name: 'Chaqueta Café Estampada', price: 35990, image: 'imagenes/modelo4.PNG' },
+                    { name: 'Polera Negra Estampada', price: 15000, image: 'imagenes/modelo10.jpg' }
+                ];
+                productGallery.innerHTML = '';
+                recommendedProducts.forEach(product => {
+                    productGallery.innerHTML += `
+                        <div class="carousel-item">
+                            <img src="${product.image}" alt="${product.name}">
+                            <div class="overlay">
+                                <p class="product-name">${product.name}</p>
+                                <p class="product-price">$${product.price.toLocaleString()}</p>
+                                <button class="add-to-cart" onclick="addToCart('${product.name}', ${product.price})">Agregar al Carrito</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        });
+        
+
+        // Función para agregar productos al carrito
+        function addToCart(name, price) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Verificar si el producto ya existe en el carrito
+            const exists = cart.some(product => product.name === name);
+
+            if (exists) {
+                alert(`${name} ya está en el carrito.`);
+                return; // No agregar el producto duplicado
+            }
+
+            // Agregar el nuevo producto
+            cart.push({ name, price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Notificar al usuario
+            alert(`${name} agregado al carrito por $${price.toLocaleString()}`);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CaiCai</title>
+    <link rel="stylesheet" href="estiloform.css">
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <div class="wrapper">
+        <span class="rotate-bg"></span>
+        <span class="rotate-bg2"></span>
+
+        <!-- Formulario de Login -->
+        <div class="form-box login">
+            <h1 class="title animation" style="color: #000;--i:0; --j:21">Iniciar Sesión</h1>
+            <form action="#">
+                <div class="input-box animation" style="--i:1; --j:22">
+                    <input type="text" required id="username">
+                    <label for="">Nombre de Usuario</label>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box animation" style="--i:2; --j:23">
+                    <input type="password" required>
+                    <label for="">Contraseña</label>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <button type="submit" class="btn animation" style="--i:3; --j:24" >Iniciar Sesión</button>
+                <div class="linkTxt animation" style="--i:5; --j:25">
+                    <p>Aún no tienes cuenta? <a href="#" class="register-link">Regístrate</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Texto Informativo -->
+        <div class="info-text login">
+            <h1 class="animation" style="--i:0; --j:20">Bienvenido!</h1>
+            <p class="animation" style="--i:1; --j:21">Inicia Sesión o Regístrate para obtener descuentos con la aplicación!</p>
+        </div>
+
+        <!-- Formulario de Registro -->
+        <div class="form-box register">
+            <h1 class="title animation" style="color: #000;--i:17; --j:0" id="registrate">Regístrate</h1>
+            <form action="#">
+                <div class="input-box animation" style="--i:18; --j:1">
+                    <input type="text" required>
+                    <label for="">Nombre de Usuario</label>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box animation" style="--i:19; --j:2">
+                    <input type="email" required>
+                    <label for="">Email</label>
+                    <i class='bx bxs-envelope'></i>
+                </div>
+                <div class="input-box animation" style="--i:20; --j:3">
+                    <input type="password" required>
+                    <label for="">Contraseña</label>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+                <button type="submit" class="btn animation" style="--i:21;--j:4">Regístrame</button>
+                <div class="linkTxt animation" style="--i:22; --j:5">
+                    <p>Ya tienes una cuenta? <a href="#" class="login-link">Inicia Sesión</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Texto Informativo del Registro -->
+        <div class="info-text register">
+            <h1 class="animation" style="--i:17; --j:0;">Bienvenido Nuevamente</h1>
+            <p class="animation" style="--i:18; --j:1;">Al continuar, aceptas nuestros términos de uso y política de privacidad</p>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        // Cargar footer dinámicamente
+        fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("footer").innerHTML = data;
+        })
+        .catch(error => console.log('Error al cargar el footer:', error));
+
+        // Cargar navbar dinámicamente
+        fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("navbar").innerHTML = data;
+        })
+        .catch(error => console.log('Error al cargar el navbar:', error));
+
+        // Modificación: Guardar el usuario en localStorage al iniciar sesión
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.querySelector('.form-box.login form');
+            loginForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const username = document.getElementById('username').value;
+                localStorage.setItem('username', username);
+                window.location.href = 'index.html';
+            });
+
+            const wrapper = document.querySelector('.wrapper');
+            const registerLink = document.querySelector('.register-link');
+            const loginLink = document.querySelector('.login-link');
+
+            registerLink.onclick = () => {
+                wrapper.classList.add('active');
+            };
+
+            loginLink.onclick = () => {
+                wrapper.classList.remove('active');
+            };
+        });
+    </script>
+</body>
+</html>

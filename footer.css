@@ -1,0 +1,145 @@
+/* Reset general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 250px;
+    margin: 10px;
+}
+
+.footer-column h3 {
+    margin-bottom: 15px;
+    color: #ffcc00;
+}
+
+.footer-column ul {
+    list-style-type: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.footer-column ul li a:hover {
+    color: #ffcc00;
+}
+
+/* Botones de redes sociales */
+.social-icons {
+    display: flex;
+}
+
+.social-icons li {
+    margin-right: 10px;
+}
+
+/* Botón social básico */
+.social-btn {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #555;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.social-btn svg {
+    fill: white;
+    width: 24px;
+    height: 24px;
+}
+
+/* Efecto hover para los botones sociales */
+.social-btn:hover {
+    background-color: #ffcc00;
+}
+
+/* Colores personalizados para cada red social */
+.social-btn.facebook:hover {
+    background-color: #3b5998;
+}
+
+.social-btn.twitter:hover {
+    background-color: #1da1f2;
+}
+
+.social-btn.instagram:hover {
+    background-color: #e4405f;
+}
+
+/* Estilos para el texto del footer inferior */
+.footer-bottom {
+    text-align: center;
+    padding-top: 10px;
+    border-top: 1px solid #444;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #bbb;
+}
+
+/* Responsivo para pantallas medianas */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-column {
+        margin-bottom: 20px;
+    }
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 480px) {
+    .footer-column {
+        min-width: 100% !important;
+    }
+
+    .social-btn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .social-btn svg {
+        width: 30px;
+        height: 30px;
+    }
+    .footer-container{
+        width: 100% !important;
+    }
+}
