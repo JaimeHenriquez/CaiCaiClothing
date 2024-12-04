@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    padding: 20px 100px;
+    background: #521137;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo{
+    font-size: 32px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.navbar a{
+    position: relative;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    margin-left: 40px;
+}
+
+.navbar a::before{
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: .3s;
+}
+
+.navbar a:hover:before{
+    width: 100%;
+}
+#check{
+    display: none;
+
+}
+
+.icons{
+    right: 5%;
+    position: absolute;
+    font-size: 2.8rem;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+}
+
+
+@media (max-width: 992px){
+    .header{
+        padding: 1.3rem 5%;
+    }
+}
+
+@media (max-width: 1120px){
+    .icons{
+        display: inline-flex;
+    }
+    #check:checked~.icons #menu-icon{
+        display: none;
+
+    }
+    .icons #close-icon{
+        display: none;
+
+    }
+    #check:checked~.icons #close-icon{
+        display: block;
+        
+    }
+    .navbar{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background: #ff6f6f;
+        overflow: hidden;
+        transition: .3s ease;
+        z-index: 9999; /* Asegura que esté por encima del contenido */
+    }
+    #check:checked~.navbar{
+        height: 17.7rem;
+        
+    }
+    .navbar a{
+        display: block;
+        font-size: 1.1rem;
+        margin: 1.5rem 0;
+        text-align: center;
+        transform: translateY(-50px);
+        transition: .3s ease;
+    }
+    #check:checked~.navbar a{
+        transform: translateY(0);
+        transition-delay: calc(0.15s * var(--i));
+        
+    }
+}
+.header::before{
+    top: 0;
+    left: 0;
+    content:'';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
